@@ -238,7 +238,7 @@ function generateSequence () {
           }
         }
 
-        context.fillStyle = volors [tetromino.name]; 
+        context.fillStyle = colors [tetromino.name]; 
         for (let row = 0; row < tetromino.matrix.length; 
              row++) {
           for ( let col = 0; col <
@@ -261,7 +261,7 @@ function generateSequence () {
         ? tetromino.col -1 
           : tetromino.col +1; 
 
-        if (isVlidMove(tetromino.matrix, tetromino.row, col)) { 
+        if (isValidMove(tetromino.matrix, tetromino.row, col)) { 
           tetromino.col = col; 
         }
       }
