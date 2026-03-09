@@ -23,7 +23,19 @@
 <body>
 <canvas id="canvas" width="400" height="800"></canvas>
 <script> 
+ // https://tetris.fandom.com/wiki/Tetris_Guideline
 
+// get a random integer between the range of [min,max]
+// @see https://stackoverflow.com/a/1527820/2124254
+  function getRandomInt(min,max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+
+    return Math.floor(math.random() * (max - min +1)) + min; 
+  }
+
+//generate a new tetromino sequence 
+  // @see https://tetris.fandom.com/wiki/Random_Generator
 function generateSequence () {
   const sequence = [ 'I', 'J', 'L', 'O', 'S', 'T', 'Z'];
 
