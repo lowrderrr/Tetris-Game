@@ -89,10 +89,10 @@ function generateSequence () {
            //oustude the game bounds
            cellCol + col < 0 ||
            cellCol + col >= playfield[0].length ||
-           cellRow = row >= playfield.length ||
+           cellRow + row >= playfield.length ||
            //collides with another piece
            playfield[cellRow + row][cellCol + col])
-             ){
+             ) {
            return false; 
          }
        }
@@ -102,6 +102,7 @@ function generateSequence () {
   
 // place the teromino on the plyufield
   function placeTetromino(){
+    let linesout=0;
   for (let row = 0 ; row < tetromino.matrix.length; row++) { 
     for (let col = 0; col < tetromino.matrix[row].length; col++) {
       if (tetromino.matrix[row][col]) { 
@@ -129,12 +130,24 @@ function generateSequence () {
           playfield[r][c] = playfield [r-1][c];
         }
       }
+        linesOut++;
+        //console.log('linesOUt++");
    } 
       else { 
         row--; 
       }
     }
-     tetromino = getNextTetromino(); 
+    if(linesOut>0)
+    {
+      //alert(linesOut);
+      AllLinesOut += 1linesOut;
+      document.getElementById('AllLinesOut') .innerHTML= 'LinesOut:' + AllLinesOut;
+     
+  } 
+
+    tetromino =  tetrominoNext; 
+    tetrominoNext = getNextTetromino();
+    tetromino.getElementById('nextFigureDIV').innerHTML =  ' NextFigure:' + tetrominoNext.name; 
   } 
 
   //show the game over screen-
@@ -228,15 +241,17 @@ function generateSequence () {
 
     let count = 0;
     let teromino =  getTtetromino(); 
+  document.getElementById('nextFigureDIV') .INNERhtml = 'NextFigure:' tetrominoNext.name;  
+    let tetromino = getNextTetromino(); 
     let rAF =  null;  //keep track of the animation frame so we can cancel it 
     let gameOver = false; 
 
   //game loop 
     function loop (){ 
+      window.status= isPaused; 
+      if(isPaused) {return;} 
       rAF = requestAnimationFrame(loop); 
       context.clearRect(0, 0, canvas.width, canvas.height);
-
-      
 
       //draw the playfield 
       for (let row = 0; row < 20; row++) {
@@ -253,9 +268,6 @@ function generateSequence () {
 
       //draw active tetromino 
       if (tetromino) { 
-
-
-        
 
         //tetromino falls every 35 frames 
         if (++count > 35) {
@@ -301,8 +313,89 @@ function generateSequence () {
           tetromino.col = col; 
         }
       }
-      
 
+      //down arrow (drop) 
+      if (e.which === 40) {
+       downOne ();
+      }
+
+      //space key (fast drop) 
+      if (e.which === 32 ) {
+        while(!downOne()){ 
+        } 
+      } 
+
+      if (e. which === ' I'. charCodeAt()) { 
+        while (tetrominoNext.name! = 'I'){ 
+          tetrominoNext =  getNextTetromino();
+        }
+        document.getElementById('nextFigureDIV') . innerHTML = 'NextFigure:' + tetrominoNext,.name; 
+      } 
+      if(e.which=== 'L'. charCodeAT()) { 
+        while(tetrominoNext.name! = 'L') { 
+          tetrominoNext= getNextTetromino();
+        }
+        document.getElementById('nextFigureDIV') .  innerHTML = 'NextFigure:' + tetrominoNext.name; 
+      } 
+      if (e.which ==='O'. charCodeAt ()) {
+        while(tetrominoNext.name = 'O') { 
+          tetrominoNext =  getNextTetromino(); 
+        }
+        document.getElementById ( 'NextFigureDIV' ) .innerHTML = 'NextFigure:' + tetrominoNext.name; 
+      } 
+      if (e.which === 'S' .charCodeAt()) { 
+        while ( tetromino Next. name! = 'S' ) { 
+          tetrominoNext = getNextTetromino(); 
+        } 
+        document.getElementById( 'NextFigure' ). innerHTML = "NextFigure:' 
+          + terominoNext.name;
+      } 
+      if (e.which === 'T' . charCodeAt()) { 
+        while ( tetrominoNext. name!= 'T') {
+          tetrominoNext = getNextTetromino(); 
+        }
+         document.getElementById( 'NextFigure' ). innerHTML = "NextFigure:' 
+          + terominoNext.name;
+      }
+      if (e.which === 'Z' . charCodeAt()) { 
+        while ( tetrominoNext. name!= 'Z') {
+          tetrominoNext = getNextTetromino(); 
+        }
+        document.getElementById( 'nextFigureDIV'). innerHTML = 'NextFigure:' =+ tetrominoNEXT . name
+      }  
+
+      if ((e.which ===27) || (e. which ===13 )) { 
+        isPaused = !isPaused; 
+        //alert ( '" paused" . Press "ok" for continue" ); 
+      } 
+      //allert ('keyDownCode:="'+e.which) ; 
+    }); 
+  funtion downOne() 
+  { 
+    const row = tetromino.row +1; 
+    if (isValidMove (tetromino. matrix, row, tetromino. col)) 
+      } 
+  tetromino.row = row -1; 
+
+  placeTetromino(); 
+  return true; 
+  } 
+  tetromino. row = row; 
+  return false;
+  } 
+
+  fucntion restartGame() 
+  { 
+    cancelAnimationFrame(rAF);  //cancel the current animation fram 
+    gameOver = flase; 
+
+    //reset playfield
+    for ( let row = -2; row < playfield.length; row++) { 
+      for (let col = 0; col < playfield[row] . length; col++ ) { 
+        playfield[row][col] = 0; 
+      }
+    }
+          
       //up arrow key (rotate) 
       if ( e.which === 38) { 
         const matrix = rotate (tetromino.matrix); 
@@ -313,11 +406,6 @@ function generateSequence () {
         }
       }
       
-
-      //down arrow (drop) 
-      if (e.which === 40) {
-        const row = tetromino.row + 1; 
-
 
         if (!isValidMove(tetromino.matrix, row,
                          tetromino.col)) { 
