@@ -1,32 +1,23 @@
 class Tetris {
     constructor (imageX,imageY,template) {
 
-        this.imageY-imageY;
+        this.imageY=imageY;
         this.imageX=imageX;
         this.template=template;
     }
-    checkBottom(){}
-    checkLeft(){}
-    checkRight(){}
-    moveRight(){}
-    changeRotation(){}
-}
+   }
 
-const imageSquaresize=24;
 const size = 40;
-const FramePerSecond=24;
-const gameSpeed= 5;
-const canvas=Document.getElementById=("canvas");
-const image = document.gtElementById("images");
+const framePerSecond = 24; 
+const gameSpeed = 5;
+const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-const squareCountX = canvas.width/size;
-const squareCountY = canvas.height/size;
 
 const shapes =[
-    new tetris(0,120,[
+    new Tetris(0,120,[
         [0,1,0],
-        [0.1,1],
-        [1.1,0],
+        [0,1,1],
+        [1,1,0],
     ]),
     new Tetris(0.96,[
         [0,0,0],
@@ -67,13 +58,13 @@ const shapes =[
 let getMap;
 let gameOver;
 let CurrentShape;
-let NetShape;
+let NextShape;
 let score;
 let initialTwoDarr;
 
 let gameLoop = () => {
 
-setInterval(PaymentRequestUpdateEvent, 1000 / gameSpeed);
+setInterval(Update, 1000 / gameSpeed);
 setInterval(draw,1000/framePerSecond);
 };
 
@@ -102,9 +93,9 @@ let currentDrawTetris = () => {
 let drawingShape = () =>{};
 
 let draw = () => {
-    ctx.clearReact(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
     drawBackground();
-    drawSqaure();
+    drawSquare();
     currentDrawTetris();
     drawNetShape();
     if (gameOver) {
@@ -132,6 +123,6 @@ let resetVars = () => {
     }
     score=0;
     gameOver=false;
-    currentShape=getRandomShape();
+    CurrentShape=getRandomShape();
     netShape=getRandomShape();
 }
