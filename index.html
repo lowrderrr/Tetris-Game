@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Tetris Game</title>
+<title>Tetris Game </title>
   <meta charset = "UTF-8">
   <style>
     html, body {
@@ -9,22 +9,25 @@
     }
 
     body{
-      background:black;
+      background: black;
       display: flex; 
-      alighn-item: center;
+      align-item: center;
       justify-content: center;
     }
 
     canvas{
       border: 1px solid white;
     }
+    
   </style>
 </head>
+  
 <body>
   <center> 
-  <div id ="TetrisDIV" style= " border=collapse; border: 1px solid black; width: 320px; height: 640; 
+  <div id ="TetrisDIV" style = "border = collapse; border: 1px solid black; width: 320px; height: 640; 
     align-items: center; 
-    justify-content: center;" > 
+    justify-content: center"; > 
+    
   </div>
     
     </center>
@@ -40,7 +43,7 @@
     min = Math.ceil(min);
     max = Math.floor(max);
 
-    return Math.floor(math.random() * (max - min +1)) + min; 
+    return Math.floor(math.random() * (max - min + 1)) + min; 
   }
 
 //generate a new tetromino sequence 
