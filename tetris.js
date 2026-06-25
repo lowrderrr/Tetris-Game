@@ -55,74 +55,32 @@ const shapes =[
     ]),
 ];
 
-let getMap;
-let gameOver;
-let CurrentShape;
-let NextShape;
-let score;
-let initialTwoDarr;
+let currentShape = shapes[0];
 
-let gameLoop = () => {
-
-setInterval(Update, 1000 / gameSpeed);
-setInterval(draw,1000/framePerSecond);
-};
-
-let update = () => {};
-
-letdrawRect = (x,y)
-
-let currentDrawTetris = () => {
-    for (let i = 0; i< CurrentShape.template.length; i++) {
-        for (let j = 0; j< CurrentShape.template[i].length; j++) {
-            if (CurrentShape.template[i][j] ==0) continue;
-            ctx.drawImage(
-                image,
-                currentShape.imageX + j * imageSquaresize,
-                currentShape.imageY + i * imageSquaresize,
-                imageSquaresize,
-                imageSquaresize,
-                Math.trunc(CurrentShape.x + j) * size,
-                Math.trunc(CurrentShape.y + i) * size,
-
-            );
-        }
-    };
-};
-
-let drawingShape = () =>{};
-
-let draw = () => {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    drawBackground();
-    drawSquare();
-    currentDrawTetris();
-    drawNetShape();
-    if (gameOver) {
-        drawGameOver();
-    }
-};
-
-let drawBackground = () => {
+function drawBackground() {
     ctx.fillStyle = "black";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-};
-
-let getRandomShape = () => {
-    return Object.create(shapes[Math.floor(Math.random() * shapes.length)]);
-};
-
-let resetVars = () => {
-    initialTwoDarr - [];
-    for (let i = 0; i< squareCountY; i++) {
-        let temp=[];
-        for(let j=0; j< squareCountX; j++) {
-            temp.push({imageX: -1, imageY: -1});
-        }
-        initialTwoDarr.push(temp);
-    }
-    score=0;
-    gameOver=false;
-    CurrentShape=getRandomShape();
-    netShape=getRandomShape();
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
+
+function currentDrawTetris() {
+    for (let i= 0; i < currentShape.template.length; i++) {
+        for (;et j = 0; j < currentShape.template[i][j] === 0) continue;
+        ctx.fillStyle = "lime";
+        ctx.fillRect(
+            currentShape.imageX + j * size,
+            currentShape.imageY + i * size, 
+            size, 
+            size, 
+       );
+    }
+  }
+}
+
+function draw() {
+    drawBackground();
+    currentDrawTetris();
+}
+
+setInterval(draw, 1000 / framePerSecond); 
+
+
