@@ -22,13 +22,13 @@ const ctx = canvas.getContext("2d");
 const squareCountX = canvas.width / size;
 const squareCountY = canvas.height / size;
 
-const shapes =[
-    new tetris(0,120,[
+const shapes = [
+    new Tetris(0, 120,[
         [0,1,0],
-        [0.1,1],
-        [1.1,0],
+        [0,1,1],
+        [1,1,0],
     ]),
-    new Tetris(0.96,[
+    new Tetris(0, 96, [
         [0,0,0],
         [1,1,1],
         [0,1,0],
@@ -79,12 +79,12 @@ setInterval(draw, 1000 / framePerSecond);
 
 let update = () => {};
 
-letdrawRect = (x,y)
+letDrawRect = (x,y)
 
 let currentDrawTetris = () => {
     for (let i = 0; i< CurrentShape.template.length; i++) {
         for (let j = 0; j< CurrentShape.template[i].length; j++) {
-            if (CurrentShape.template[i][j] === 0) continue;
+            if (currentShape.template[i][j] === 0) continue;
             ctx.drawImage(
                 image,
                 currentShape.imageX + j * imageSquaresize,
@@ -102,7 +102,7 @@ let currentDrawTetris = () => {
 let drawingShape = () =>{};
 
 let draw = () => {
-    ctx.clearReact(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawBackground();
     drawSquare();
     currentDrawTetris();
