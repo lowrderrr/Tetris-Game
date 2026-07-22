@@ -1,12 +1,107 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<title>Tetris Game </title>
-  <meta charset = "UTF-8">
+  <meta charset="utf-8"/>
+  <meta name= "viewport" content="width=device-width,initial-scale=1" />
+  <title>Tetris Game </title>
   <style>
+    :root {
+      --bg: #000;
+      --panel-bg:#111;
+      text:#fff;
+      --grid-size: 32px; 
+
+    }
+    
     html, body {
       height: 100%;
       margin: 0;
+      background: var(--bg);
+      color: var (--text); 
+      font-family: system-ui, apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
     }
+
+    .page { 
+      display: flex; 
+      min-height: 100%
+      align-items: center; 
+      justify-content: center; 
+      padding: 24px; 
+      box-sizing: border-box; 
+    } 
+    .container { 
+      display: flex; 
+      gap: 16px; 
+      align-items: flex-start; 
+    }
+
+    .game-panel {
+      background: var(--pane;-bg); 
+      padding: 12px; 
+      border-radius: 6px; 
+      box-shadow: 0 4px 20px rgba (0,0,0,0.6); 
+    }
+
+    canvas#game { 
+      display: block; 
+      width: 320px; 
+      height: 640px; 
+      image-rendering: pixelated; 
+      border: 2px solid #3fff;
+      box-sizing: border-box; 
+    }
+
+    .hud {
+      width: 160px; 
+      display: flix; 
+      flex-direction: colum; 
+      gap: 12px; 
+      color: var (--text); 
+    }
+
+    .hud .panel {
+      background: #0b0b0b; 
+      padding: 8px; 
+      border-radius: 4px; 
+      min-height: 72px; 
+    }
+    button { 
+      padding: 8px 12px; 
+      border-radius: 4px; 
+      border: 1px solid #444; 
+      background: #222;
+      color: var (--text); 
+      cursor: pointer;
+    }
+     button:active { transform: translateY(1px); }
+  </style>
+</head>
+<body>
+  <main class="page" role="main">
+    <section class="container" aria-label="Tetris game container">
+      <div class="game-panel">
+        <canvas id="game" width="320" height="640" aria-label="Tetris playfield"></canvas>
+      </div>
+
+      <aside class="hud" aria-label="Game controls and info">
+        <div class="panel" id="nextFigureDIV" aria-live="polite">Next piece: —</div>
+        <div class="panel" id="AllLinesOut" aria-live="polite">Lines: 0</div>
+        <div class="panel">
+          <button id="restartBtn" type="button">Restart</button>
+        </div>
+        <div class="panel">
+          <small>Controls: ← → move • ↑ rotate • ↓ soft drop • Space hard drop • Esc pause</small>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <!-- Load game logic: tetris.js should be a clean, linted file. -->
+  <!-- Use defer so the DOM is available when the script runs -->
+  <script src="tetris.js" defer></script>
+</body>
+</html>
+        
 
     body{
       background: black;
